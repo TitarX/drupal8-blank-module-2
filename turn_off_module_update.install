@@ -3,39 +3,45 @@
 /**
  * Implements hook_install().
  */
-function turn_off_module_update_install()
-{
-	module_set_weight('turn_off_module_update', 100);
+function turn_off_module_update_install() {
+  module_set_weight('turn_off_module_update', 100);
 }
 
 /**
  * @return mixed
  * Implements hook_schema()
  */
-function turn_off_module_update_schema()
-{
-	$schema['turn_off_module_update'] = array(		// Название таблицы
-		'decription' => 'Turn off module update',	// Описание таблицы
-		'fields' => array(							// Массив с колонками таблицы
-			'id' => array(							// Название колонки
-				'description' => 'ID',				// Описание колонки
-			'type' => 'serial',						// Тип данных
-			'size' => 'normal',						// Размер типа данных
-			'unsigned' => true,						// Unsigned (Без знака), по умолчанию FALSE
-			'not null' => true						// Не может быть пустым
-			),
-			'module_name' => array('type' => 'varchar', 'length' => 255, 'not null' => true)
-		),
-		'primary key' => array('id')
-	);
-	
-	return $schema;
+function turn_off_module_update_schema() {
+  $schema['turn_off_module_update'] = [    // Название таблицы
+    'decription' => 'Turn off module update',  // Описание таблицы
+    'fields' => [              // Массив с колонками таблицы
+      'id' => [              // Название колонки
+        'description' => 'ID',
+        // Описание колонки
+        'type' => 'serial',
+        // Тип данных
+        'size' => 'normal',
+        // Размер типа данных
+        'unsigned' => TRUE,
+        // Unsigned (Без знака), по умолчанию FALSE
+        'not null' => TRUE
+        // Не может быть пустым
+      ],
+      'module_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
 }
 
 /**
  * Implements hook_uninstall()
  */
-function turn_off_module_update_uninstall()
-{
-	\Drupal::state()->delete('turn_off_module_update.turn_off_module_update');
+function turn_off_module_update_uninstall() {
+  \Drupal::state()->delete('turn_off_module_update.turn_off_module_update');
 }
